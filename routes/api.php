@@ -21,3 +21,7 @@ Route::prefix('tipo-criticidade')->group(function () {
 Route::prefix('tipo-incidente')->group(function () {
     Route::get('/all',  [App\Http\Controllers\TipoIncidente::class, 'getAll']);
 });
+
+Route::prefix('incidente')->group(function () {
+    Route::post('/',  [App\Http\Controllers\Incidente::class, 'insert']);
+});

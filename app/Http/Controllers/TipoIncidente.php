@@ -15,10 +15,12 @@ class TipoIncidente extends Controller
                 'status' => true,
                 'response' => $incidente->getAll()
             ], 200);
-        } catch (Exception $usu) {
+        } catch (\Exception $e) {
             return response([
                 'status' => false,
-                'response' => 'Server Error'
+                'response' => [
+                    'error' => 'Server Error'
+                ]
             ], 500);
         }
     }

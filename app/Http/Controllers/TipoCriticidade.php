@@ -15,10 +15,12 @@ class TipoCriticidade extends Controller
                 'status' => true,
                 'response' => $crit->getAll()
             ], 200);
-        } catch (Exception $usu) {
+        } catch (\Exception $e) {
             return response([
                 'status' => false,
-                'response' => 'Server Error'
+                'response' => [
+                    'error' => 'Server Error'
+                ]
             ], 500);
         }
     }
