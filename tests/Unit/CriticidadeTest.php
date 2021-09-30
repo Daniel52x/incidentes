@@ -17,4 +17,11 @@ class CriticidadeTest extends TestCase
         $crit = new CriticidadeLib();
         $this->assertTrue(is_array($crit->getAll()));
     }
+
+    public function test_exists_id_tipo_criticidade()
+    {
+        $incidente = new CriticidadeLib();
+        $this->assertTrue($incidente->validateIdCriticidade(1));
+        $this->assertFalse($incidente->validateIdCriticidade(-2));
+    }
 }

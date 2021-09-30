@@ -9,6 +9,10 @@ class CriticidadeLib
     {
         return Criticidade::select('id', 'nome', 'created_at')->where('status', 1)->get()->toArray();
     }
+
+    public function validateIdCriticidade($id){
+        return Criticidade::where('id', $id)->count() > 0;
+    }
 }
 
 

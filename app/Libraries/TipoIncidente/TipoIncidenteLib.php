@@ -9,6 +9,10 @@ class TipoIncidenteLib
     {
         return TipoIncidente::select('id', 'nome', 'created_at')->where('status', 1)->get()->toArray();
     }
+
+    public function validateIdTipoIncidente($id){
+        return TipoIncidente::where('id', $id)->count() > 0;
+    }
 }
 
 

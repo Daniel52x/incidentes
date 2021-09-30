@@ -8,6 +8,13 @@ class IncidenteException extends \Exception
         parent::__construct($message, $errorCode);
     }
 
+    public static function idTipoIncidenteInvalido(){
+        return new self("Tipo incidente não encontrado", 400);
+	}
+
+    public static function idTipoCriticidadeInvalido(){
+        return new self("Tipo criticidade não encontrado", 400);
+	}
 }
 
 

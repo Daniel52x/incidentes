@@ -17,4 +17,11 @@ class TipoIncidenteTest extends TestCase
         $incidente = new TipoIncidenteLib();
         $this->assertTrue(is_array($incidente->getAll()));
     }
+
+    public function test_exists_id_tipo_incidente()
+    {
+        $incidente = new TipoIncidenteLib();
+        $this->assertTrue($incidente->validateIdTipoIncidente(1));
+        $this->assertFalse($incidente->validateIdTipoIncidente(-2));
+    }
 }
