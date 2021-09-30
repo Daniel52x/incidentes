@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('tipo-criticidade')->group(function () {
     Route::get('/all',  [App\Http\Controllers\TipoCriticidade::class, 'getAll']);
 });
+
+Route::prefix('tipo-incidente')->group(function () {
+    Route::get('/all',  [App\Http\Controllers\TipoIncidente::class, 'getAll']);
+});
