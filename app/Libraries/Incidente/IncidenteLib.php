@@ -38,6 +38,10 @@ class IncidenteLib
         return $tipoCriticidade->validateIdCriticidade($tipoId);
     }
 
+    public function delete(IncidenteProtocol $inciProtocol){
+        return Incidente::where('id', $inciProtocol->getId())->delete();
+    }
+
 
 }
 

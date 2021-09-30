@@ -41,4 +41,35 @@ class Incidente extends Controller
             ], 500);
         }
     }
+
+    public function delete(Request $request, $id) {
+        try {
+            $incidenteProtocol = new IncidenteProtocol();
+            $incidenteProtocol->setId($id);
+
+            $incidente = new IncidenteLib();
+            $linhasAfetadas = $incidente->delete($incidenteProtocol);
+            if($linhasAfetadas <= 0){
+                throw new IncidenteException("Não foi possível realizar a exclusão do registro", 400);
+            }
+            return response([
+                'status' => true,
+                'response' => []
+            ], 200);
+        } catch (IncidenteException $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => $e->getMessage()
+                ]
+            ], $e->getCode());
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => 'Server Error'
+                ]
+            ], 500);
+        }
+    }
 }

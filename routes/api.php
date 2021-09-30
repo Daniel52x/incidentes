@@ -24,4 +24,5 @@ Route::prefix('tipo-incidente')->group(function () {
 
 Route::prefix('incidente')->group(function () {
     Route::post('/',  [App\Http\Controllers\Incidente::class, 'insert']);
+    Route::delete('/{id}',  [App\Http\Controllers\Incidente::class, 'delete']);
 });
