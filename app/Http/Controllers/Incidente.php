@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Libraries\Incidente\Protocols\IncidenteProtocol;
 use App\Libraries\Incidente\IncidenteLib;
 use App\Libraries\Incidente\Exceptions\IncidenteException;
+use App\Libraries\Utilitarios\UtilitariosLib;
 
 class Incidente extends Controller
 {
@@ -19,26 +20,13 @@ class Incidente extends Controller
 
             $incidente = new IncidenteLib();
             $idIncidente = $incidente->insert($incidenteProtocol);
-            return response([
-                'status' => true,
-                'response' => [
-                    "idIncidente" => $idIncidente
-                ]
-            ], 200);
+            return response(UtilitariosLib::responseSuccess([
+                "idIncidente" => $idIncidente
+            ]), 200);
         } catch (IncidenteException $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => $e->getMessage()
-                ]
-            ], $e->getCode());
+            return response(UtilitariosLib::responseError($e), $e->getCode());
         } catch (\Exception $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => 'Server Error'
-                ]
-            ], 500);
+            return response(UtilitariosLib::responseError($e), 500);
         }
     }
 
@@ -52,24 +40,11 @@ class Incidente extends Controller
             if($linhasAfetadas <= 0){
                 throw new IncidenteException("Não foi possível realizar a exclusão do registro", 400);
             }
-            return response([
-                'status' => true,
-                'response' => []
-            ], 200);
+            return response(UtilitariosLib::responseSuccess([]), 200);
         } catch (IncidenteException $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => $e->getMessage()
-                ]
-            ], $e->getCode());
+            return response(UtilitariosLib::responseError($e), $e->getCode());
         } catch (\Exception $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => 'Server Error'
-                ]
-            ], 500);
+            return response(UtilitariosLib::responseError($e), 500);
         }
     }
 
@@ -88,50 +63,24 @@ class Incidente extends Controller
                 throw new IncidenteException("Não foi possível realizar a alteração do registro", 400);
             }
 
-            return response([
-                'status' => true,
-                'response' => []
-            ], 200);
+            return response(UtilitariosLib::responseSuccess([]), 200);
         } catch (IncidenteException $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => $e->getMessage()
-                ]
-            ], $e->getCode());
+            return response(UtilitariosLib::responseError($e), $e->getCode());
         } catch (\Exception $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => 'Server Error'
-                ]
-            ], 500);
+            return response(UtilitariosLib::responseError($e), 500);
         }
     }
 
     public function getAll(Request $request) {
         try {
             $incidente = new IncidenteLib();
-            return response([
-                'status' => true,
-                'response' => [
-                    $incidente->getAll()
-                ]
-            ], 200);
+            return response(UtilitariosLib::responseSuccess([
+                $incidente->getAll()
+            ]), 200);
         } catch (IncidenteException $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => $e->getMessage()
-                ]
-            ], $e->getCode());
+            return response(UtilitariosLib::responseError($e), $e->getCode());
         } catch (\Exception $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => 'Server Error'
-                ]
-            ], 500);
+            return response(UtilitariosLib::responseError($e), 500);
         }
     }
 
@@ -142,26 +91,13 @@ class Incidente extends Controller
 
             $incidente = new IncidenteLib();
             $dadosIncidentes = $incidente->getById($incidenteProtocol);
-            return response([
-                'status' => count($dadosIncidentes) > 0,
-                'response' => [
-                    $dadosIncidentes
-                ]
-            ], 200);
+            return response(UtilitariosLib::responseSuccess([
+                $dadosIncidentes
+            ], count($dadosIncidentes) > 0), 200);
         } catch (IncidenteException $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => $e->getMessage()
-                ]
-            ], $e->getCode());
+            return response(UtilitariosLib::responseError($e), $e->getCode());
         } catch (\Exception $e) {
-            return response([
-                'status' => false,
-                'response' => [
-                    'error' => 'Server Error'
-                ]
-            ], 500);
+            return response(UtilitariosLib::responseError($e), 500);
         }
     }
 }
