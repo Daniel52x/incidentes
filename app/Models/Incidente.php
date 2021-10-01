@@ -28,7 +28,7 @@ class Incidente extends Model
     }
 
     public function getById($id){
-        return $this->select('incidente.id', 'incidente.titulo', 'incidente.descricao', 'c.nome as criticidade', 't.nome as tipo_incidente', 'incidente.created_at')
+        return $this->select('incidente.id', 'incidente.titulo', 'incidente.descricao', 'c.nome as criticidade', 't.nome as tipo_incidente', 'incidente.status', 'incidente.created_at', 'incidente.criticidade_id', 'incidente.tipo_incidente_id')
             ->join('criticidade as c', 'c.id', '=', 'incidente.criticidade_id')
             ->join('tipo_incidente as t', 't.id', '=', 'incidente.tipo_incidente_id')
             ->where('incidente.id', $id)

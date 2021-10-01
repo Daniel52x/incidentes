@@ -11,9 +11,7 @@ class TipoCriticidade extends Controller
     public function getAll(Request $request) {
         try {
             $crit = new CriticidadeLib();
-            return response(UtilitariosLib::responseSuccess([
-                $crit->getAll()
-            ]), 200);
+            return response(UtilitariosLib::responseSuccess($crit->getAll()), 200);
         } catch (\Exception $e) {
             return response(UtilitariosLib::responseError($e), 500);
         }

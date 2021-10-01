@@ -74,9 +74,9 @@ class Incidente extends Controller
     public function getAll(Request $request) {
         try {
             $incidente = new IncidenteLib();
-            return response(UtilitariosLib::responseSuccess([
+            return response(UtilitariosLib::responseSuccess(
                 $incidente->getAll()
-            ]), 200);
+            ), 200);
         } catch (IncidenteException $e) {
             return response(UtilitariosLib::responseError($e), $e->getCode());
         } catch (\Exception $e) {
@@ -91,9 +91,7 @@ class Incidente extends Controller
 
             $incidente = new IncidenteLib();
             $dadosIncidentes = $incidente->getById($incidenteProtocol);
-            return response(UtilitariosLib::responseSuccess([
-                $dadosIncidentes
-            ], count($dadosIncidentes) > 0), 200);
+            return response(UtilitariosLib::responseSuccess($dadosIncidentes, count($dadosIncidentes) > 0), 200);
         } catch (IncidenteException $e) {
             return response(UtilitariosLib::responseError($e), $e->getCode());
         } catch (\Exception $e) {
