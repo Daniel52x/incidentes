@@ -72,4 +72,40 @@ class Incidente extends Controller
             ], 500);
         }
     }
+
+    public function update(Request $request, $id) {
+        try {
+            $incidenteProtocol = new IncidenteProtocol();
+            $incidenteProtocol->setId($id);
+            $incidenteProtocol->setTipoIncidente($request->get('tipo_id_incidente'));
+            $incidenteProtocol->setTipoCriticidade($request->get('tipo_id_criticidade'));
+            $incidenteProtocol->setTitulo($request->get('titulo'));
+            $incidenteProtocol->setDescricao($request->get('descricao'));
+
+            $incidente = new IncidenteLib();
+            $linhasAfetadas = $incidente->update($incidenteProtocol);
+            if($linhasAfetadas <= 0){
+                throw new IncidenteException("Não foi possível realizar a alteração do registro", 400);
+            }
+
+            return response([
+                'status' => true,
+                'response' => []
+            ], 200);
+        } catch (IncidenteException $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => $e->getMessage()
+                ]
+            ], $e->getCode());
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => 'Server Error'
+                ]
+            ], 500);
+        }
+    }
 }

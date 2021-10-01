@@ -11,13 +11,7 @@ class IncidenteLib
 {
     public function insert(IncidenteProtocol $inciProtocol)
     {
-        if(!$this->validateTipoIncidente($inciProtocol->getTipoIncidente())){
-            throw IncidenteException::idTipoIncidenteInvalido();
-        }
-
-        if(!$this->validateTipoCriticidade($inciProtocol->getTipoCriticidade())){
-            throw IncidenteException::idTipoCriticidadeInvalido();
-        }
+        $this->validateCaracteristicasIncidentes($inciProtocol);
 
         $incidente = Incidente::create([
             'tipo_incidente_id' => $inciProtocol->getTipoIncidente(),
@@ -40,6 +34,27 @@ class IncidenteLib
 
     public function delete(IncidenteProtocol $inciProtocol){
         return Incidente::where('id', $inciProtocol->getId())->delete();
+    }
+
+    public function update(IncidenteProtocol $inciProtocol){
+        $this->validateCaracteristicasIncidentes($inciProtocol);
+
+        return Incidente::where('id', $inciProtocol->getId())->update([
+            'tipo_incidente_id' => $inciProtocol->getTipoIncidente(),
+            'criticidade_id' => $inciProtocol->getTipoCriticidade(),
+            'titulo' => $inciProtocol->getTitulo(),
+            'descricao' => $inciProtocol->getDescricao()
+        ]);
+    }
+
+    private function validateCaracteristicasIncidentes(IncidenteProtocol $inciProtocol){
+        if(!$this->validateTipoIncidente($inciProtocol->getTipoIncidente())){
+            throw IncidenteException::idTipoIncidenteInvalido();
+        }
+
+        if(!$this->validateTipoCriticidade($inciProtocol->getTipoCriticidade())){
+            throw IncidenteException::idTipoCriticidadeInvalido();
+        }
     }
 
 

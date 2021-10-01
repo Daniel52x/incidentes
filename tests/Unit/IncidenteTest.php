@@ -87,4 +87,36 @@ class IncidenteTest extends TestCase
 
         $this->assertEquals(0, $incidente->delete($incidenteProtocol2));
     }
+
+    public function test_update_incidente_returns_affected_rows()
+    {
+
+        $incidenteProtocol = new IncidenteProtocol();
+        $incidenteProtocol->setTipoIncidente(1);
+        $incidenteProtocol->setTipoCriticidade(1);
+        $incidenteProtocol->setTitulo('Titulo');
+        $incidenteProtocol->setDescricao('Descrição');
+
+        $incidente = new IncidenteLib();
+        $id = $incidente->insert($incidenteProtocol);
+
+        $incidenteProtocol->setId($id);
+        $incidenteProtocol->setTitulo('Titulo2');
+
+        $this->assertEquals(1, $incidente->update($incidenteProtocol));
+    }
+
+    public function test_update_invalid_id_returns_zero_affected_rows()
+    {
+
+        $incidente = new IncidenteLib();
+        $incidenteProtocol = new IncidenteProtocol();
+        $incidenteProtocol->setId(0);
+        $incidenteProtocol->setTipoIncidente(1);
+        $incidenteProtocol->setTipoCriticidade(1);
+        $incidenteProtocol->setTitulo('Titulo');
+        $incidenteProtocol->setDescricao('Descrição2');
+
+        $this->assertEquals(0, $incidente->update($incidenteProtocol));
+    }
 }
