@@ -56,6 +56,7 @@ class Incidente extends Controller
             $incidenteProtocol->setTipoCriticidade($request->get('tipo_id_criticidade'));
             $incidenteProtocol->setTitulo($request->get('titulo'));
             $incidenteProtocol->setDescricao($request->get('descricao'));
+            $incidenteProtocol->setStatus($request->get('status'));
 
             $incidente = new IncidenteLib();
             $linhasAfetadas = $incidente->update($incidenteProtocol);

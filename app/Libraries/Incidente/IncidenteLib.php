@@ -43,7 +43,8 @@ class IncidenteLib
             'tipo_incidente_id' => $inciProtocol->getTipoIncidente(),
             'criticidade_id' => $inciProtocol->getTipoCriticidade(),
             'titulo' => $inciProtocol->getTitulo(),
-            'descricao' => $inciProtocol->getDescricao()
+            'descricao' => $inciProtocol->getDescricao(),
+            'status' => $inciProtocol->getStatus()
         ]);
     }
 
