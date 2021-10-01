@@ -134,4 +134,34 @@ class Incidente extends Controller
             ], 500);
         }
     }
+
+    public function getById(Request $request, $id) {
+        try {
+            $incidenteProtocol = new IncidenteProtocol();
+            $incidenteProtocol->setId($id);
+
+            $incidente = new IncidenteLib();
+            $dadosIncidentes = $incidente->getById($incidenteProtocol);
+            return response([
+                'status' => count($dadosIncidentes) > 0,
+                'response' => [
+                    $dadosIncidentes
+                ]
+            ], 200);
+        } catch (IncidenteException $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => $e->getMessage()
+                ]
+            ], $e->getCode());
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => 'Server Error'
+                ]
+            ], 500);
+        }
+    }
 }

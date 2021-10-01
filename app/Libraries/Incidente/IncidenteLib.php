@@ -52,6 +52,12 @@ class IncidenteLib
         return $indenteModel->getAllIncidentes()->toArray();
     }
 
+    public function getById(IncidenteProtocol $inciProtocol){
+        $indenteModel = new Incidente();
+        $incidente = $indenteModel->getById($inciProtocol->getId());
+        return $incidente ? $incidente->toArray() : [];
+    }
+
     private function validateCaracteristicasIncidentes(IncidenteProtocol $inciProtocol){
         if(!$this->validateTipoIncidente($inciProtocol->getTipoIncidente())){
             throw IncidenteException::idTipoIncidenteInvalido();

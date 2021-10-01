@@ -125,4 +125,30 @@ class IncidenteTest extends TestCase
         $incidente = new IncidenteLib();
         $this->assertGreaterThanOrEqual(1, count($incidente->getAll()));
     }
+
+    public function test_select_incidente_by_id()
+    {
+
+        $incidenteProtocol = new IncidenteProtocol();
+        $incidenteProtocol->setTipoIncidente(1);
+        $incidenteProtocol->setTipoCriticidade(1);
+        $incidenteProtocol->setTitulo('Titulo');
+        $incidenteProtocol->setDescricao('Descrição');
+
+        $incidente = new IncidenteLib();
+        $id = $incidente->insert($incidenteProtocol);
+
+        $incidenteProtocol->setId($id);
+
+        $this->assertFalse(empty($incidente->getById($incidenteProtocol)));
+    }
+
+    public function test_select_incidente_by_id_invalid_returns_empty_array()
+    {
+        $incidenteProtocol = new IncidenteProtocol();
+        $incidenteProtocol->setId(0);
+        $incidente = new IncidenteLib();
+        
+        $this->assertTrue(empty($incidente->getById($incidenteProtocol)));
+    }
 }
