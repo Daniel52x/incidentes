@@ -23,6 +23,7 @@ Route::prefix('tipo-incidente')->group(function () {
 });
 
 Route::prefix('incidente')->group(function () {
+    Route::get('/all',  [App\Http\Controllers\Incidente::class, 'getAll']);
     Route::post('/',  [App\Http\Controllers\Incidente::class, 'insert']);
     Route::delete('/{id}',  [App\Http\Controllers\Incidente::class, 'delete']);
     Route::put('/{id}',  [App\Http\Controllers\Incidente::class, 'update']);

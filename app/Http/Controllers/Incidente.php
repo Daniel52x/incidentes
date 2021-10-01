@@ -108,4 +108,30 @@ class Incidente extends Controller
             ], 500);
         }
     }
+
+    public function getAll(Request $request) {
+        try {
+            $incidente = new IncidenteLib();
+            return response([
+                'status' => true,
+                'response' => [
+                    $incidente->getAll()
+                ]
+            ], 200);
+        } catch (IncidenteException $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => $e->getMessage()
+                ]
+            ], $e->getCode());
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'response' => [
+                    'error' => 'Server Error'
+                ]
+            ], 500);
+        }
+    }
 }

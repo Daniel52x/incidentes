@@ -119,4 +119,10 @@ class IncidenteTest extends TestCase
 
         $this->assertEquals(0, $incidente->update($incidenteProtocol));
     }
+
+    public function test_select_all_incidentes()
+    {
+        $incidente = new IncidenteLib();
+        $this->assertGreaterThanOrEqual(1, count($incidente->getAll()));
+    }
 }
