@@ -96,6 +96,7 @@ class IncidenteTest extends TestCase
         $incidenteProtocol->setTipoCriticidade(1);
         $incidenteProtocol->setTitulo('Titulo');
         $incidenteProtocol->setDescricao('Descrição');
+        $incidenteProtocol->setStatus('1');
 
         $incidente = new IncidenteLib();
         $id = $incidente->insert($incidenteProtocol);
@@ -116,6 +117,7 @@ class IncidenteTest extends TestCase
         $incidenteProtocol->setTipoCriticidade(1);
         $incidenteProtocol->setTitulo('Titulo');
         $incidenteProtocol->setDescricao('Descrição2');
+        $incidenteProtocol->setStatus('1');
 
         $this->assertEquals(0, $incidente->update($incidenteProtocol));
     }
@@ -148,7 +150,7 @@ class IncidenteTest extends TestCase
         $incidenteProtocol = new IncidenteProtocol();
         $incidenteProtocol->setId(0);
         $incidente = new IncidenteLib();
-        
+
         $this->assertTrue(empty($incidente->getById($incidenteProtocol)));
     }
 }
