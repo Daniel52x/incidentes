@@ -38,6 +38,7 @@
                 <td>${item.descricao}</td>
                 <td>${item.criticidade}</td>
                 <td>${item.tipo_incidente}</td>
+                <td>${item.status}</td>
                 <td>${data.toLocaleDateString()}</td>
                 <td><a href="#" data-id="${item.id}" data-js="alterar-incidente">Alterar<a/></td>
                 <td><a href="#" data-id="${item.id}" data-js="deletar-incidente">Deletar<a/></td>

@@ -105,6 +105,7 @@
                   <th>Descrição</th>
                   <th>Criticidade</th>
                   <th>Tipo</th>
+                  <th>Status</th>
                   <th>Criação</th>
                   <th></th>
                   <th></th>
